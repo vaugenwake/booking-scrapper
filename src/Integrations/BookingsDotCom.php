@@ -26,12 +26,12 @@ class BookingsDotCom implements IntegrationContract
         // facilities
         $facilities = [];
         $propertyFacilities = $crawler->filter('.hotel-facilities-group');
-        $propertyFacilities->each(function ($item) use (&$facilities) {
+        $propertyFacilities->each(function (Crawler $item) use (&$facilities) {
             $headline = $item->filter('.hotel-facilities-group__title')->first()->text();
             $features = $item->filter('.hotel-facilities-group__list-item');
 
             $feature = new FacilityModel($headline, []);
-            $features->each(function ($featureItem) use (&$feature) {
+            $features->each(function (Crawler $featureItem) use (&$feature) {
                 $feature->addItem($featureItem->text());
             });
 
