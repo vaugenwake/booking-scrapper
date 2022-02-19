@@ -1,0 +1,23 @@
+    <div>
+        <div class="px-1 mt-1 bg-green-600 text-black">Results:</div>
+        <dl>
+            <dt>Name:</dt>
+            <dd>{{ features.name }}</dd>
+            <dt>Address:</dt>
+            <dd>{{ features.address.toString() }}</dd>
+            <dt>Description:</dt>
+            <dd><pre>{{ features.description }}</pre><br /></dd>
+            <dt>Facilities:</dt>
+            <dd>
+
+                <dl>
+                    {% for facility in features.facilities %}
+                        <dt>{{ facility.name }}</dt>
+                        {% for item in facility.items %}
+                            <dd>{{ item }}</dd>
+                        {% endfor %}
+                    {% endfor %}
+                </dl>
+            </dd>
+        </dl>
+    </div>
