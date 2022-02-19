@@ -21,3 +21,7 @@ composer scrape
 ```
 
 Follow the on-screen prompts
+
+## Output example
+
+![Example Output](./images/example-output.png "Example Output")
