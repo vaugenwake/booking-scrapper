@@ -1,0 +1,28 @@
+{
+    "name": "vaugenwake/booking-scraper",
+    "description": "Scrape property pages of booking.com",
+    "autoload": {
+        "psr-4": {
+            "Vaugenwake\\BookingScraper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vaugen Wakeling",
+            "email": "vaugen.wakeling@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-dom": "*",
+        "ext-json": "*",
+        "ext-readline": "*",
+        "symfony/browser-kit": "^5.4",
+        "symfony/http-client": "^6.0",
+        "symfony/css-selector": "^6.0",
+        "nunomaduro/termwind": "^1.5"
+    },
+    "require-dev": {
+        "nunomaduro/collision": "^6.1"
+    }
+}
