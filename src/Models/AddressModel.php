@@ -2,31 +2,23 @@
 
 namespace Vaugenwake\BookingScraper\Models;
 
+use Geocoder\Location;
+
 class AddressModel
 {
 
     public function __construct(
-        public string $line1,
-        public ?string $line2,
-        public ?string $line3,
-        public string $country,
-        public string $postcode,
+        public Location $address
     ) {
     }
 
     public function toArray(): array
     {
-        return [
-            'address_line_1' => $this->line1,
-            'address_line_2' => $this->line2,
-            'address_line_3' => $this->line3,
-            'address_country' => $this->country,
-            'address_postcode' => $this->postcode,
-        ];
+        return $this->address->toArray();
     }
 
     public function toString(): string
     {
-        return "$this->line1, $this->line2, $this->line3, $this->country, $this->postcode";
+        return $this->address->getStreetNumber() . " " . $this->address->getStreetName() . ", " . $this->address->getLocality() . ", " . $this->address->getCountry() . ", " . $this->address->getPostalCode();
     }
 }

@@ -8,7 +8,7 @@ use Vaugenwake\BookingScraper\Models\AddressModel;
 use Vaugenwake\BookingScraper\Models\FacilityModel;
 use Vaugenwake\BookingScraper\Models\FeaturesModel;
 
-class BookingsDotCom implements IntegrationContract
+class BookingsDotCom extends BaseIntegration implements IntegrationContract
 {
     public function extractFeatures(Crawler $crawler): FeaturesModel
     {
@@ -18,10 +18,9 @@ class BookingsDotCom implements IntegrationContract
 
         // address
         $propertyAddress = $crawler->filter('.hp_address_subtitle')->first()->text();
-        // This is not the best way to do this. Would be better to try and
-        // parse this into x & y points and then use a standard API for a complete address object
-        // https://geocoder-php.org/
-        $propertyAddress = explode(',', $propertyAddress);
+
+        // Gecode and parse address
+        $propertyAddress = $this->parseAddress($propertyAddress);
 
         // facilities
         $facilities = [];
@@ -43,13 +42,7 @@ class BookingsDotCom implements IntegrationContract
 
         return new FeaturesModel(
             name: $propertyName,
-            address: new AddressModel(
-                line1: $propertyAddress[0],
-                line2: $propertyAddress[1],
-                line3: null,
-                country: $propertyAddress[3],
-                postcode: $propertyAddress[2]
-            ),
+            address: new AddressModel($propertyAddress),
             facilities: $facilities,
             description: $propertyDescription
         );
